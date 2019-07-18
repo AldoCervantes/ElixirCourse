@@ -1,0 +1,7 @@
+Mix
+    - Creates projects
+    - compiles projects
+    - runs 'tasks'
+    - manages dependencies
+
+iex -S Mix
