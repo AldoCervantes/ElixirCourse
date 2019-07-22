@@ -1,8 +1,13 @@
 defmodule Cards do
-  
+  @moduledoc """
+    Provides methods for creating and handling a deck of cards
+  """
+  @doc """
+    Returns a list of strings representing a deck of playing cards
+  """
   def create_deck do
     values = ["1" , "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    suits = ["Spades" , "Clubs", "Hearts", "Diamonds"]
+    suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
 
     for suit <- suits, value <- values do
       "#{value} of #{suit}"
@@ -13,10 +18,30 @@ defmodule Cards do
     Enum.shuffle(deck)
   end
   
+  @doc """
+    Determines whether a deck contains a given card
+
+  ## Examples
+        iex> deck = Cards.create_deck
+        iex> Cards.contains?(deck, "1 of Spades")
+        true
+
+  """
   def contains?(deck, card) do
     Enum.member?(deck, card)
   end
 
+  @doc """
+  Divides a deck into a hand and the remainder of the deck.
+  The `hand_size` argument indicates how many should be in the hand.
+
+  ## Examples
+        iex> deck = Cards.create_deck
+        iex> {hand , deck} = Cards.deal(deck, 1)
+        iex> hand
+        ["1 of Spades"] 
+
+  """
   def deal(deck, hand_size) do
     Enum.split(deck, hand_size)
   end
@@ -31,5 +56,11 @@ defmodule Cards do
       {:ok , binary} -> :erlang.binary_to_term(binary)
       {:error , _ } -> "That file does not exist"
     end
+  end
+
+  def create_hand(hand_size) do
+    Cards.create_deck
+    |> Cards.shuffle
+    |> Cards.deal(hand_size)
   end
 end
