@@ -4,4 +4,23 @@ Mix
     - runs 'tasks'
     - manages dependencies
 
-iex -S Mix
+
+**** Cheat Sheet ****
+
+Create a new project:
+    mix new project_name
+
+Compile the project:
+    iex -S mix
+
+Install dependencies:
+    mix deps.get
+
+Dependencies example:
+    deps => {:ex_doc, "~> 0.12"}
+
+Generate Documentation html:
+    mix docs
+
+Run test:
+    mix test
